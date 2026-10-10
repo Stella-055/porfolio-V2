@@ -150,7 +150,8 @@ function SkillMatrix() {
   const [active, setActive] = useState<(typeof groups)[number]>("Backend");
   return (
     <section className="section skill-section">
-      <SectionHeader number="03" label="Technical range" title="Tools in context, not isolation." />
+      <SectionHeader number="03" label="Technical range" title="Technology that has helped me grow as an Engineer" />
+    
       <div className="skill-layout"><div className="skill-tabs" role="tablist" aria-label="Skill groups">{groups.map((group, index) => <button role="tab" aria-selected={active === group} className={active === group ? "active" : ""} onClick={() => setActive(group)} key={group}><span>0{index + 1}</span>{group}</button>)}</div><AnimatePresence mode="wait"><motion.div className="skill-field" key={active} initial={{ opacity: 0, x: 15 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -15 }}><span className="skill-title">{active}</span>{skillGroups[active].map((skill, i) => <div className="skill-item" key={skill}><i style={{ opacity: 1 - i * .08 }} />{skill}</div>)}</motion.div></AnimatePresence></div>
     </section>
   );
@@ -168,7 +169,7 @@ function HighlightMark({ mark }: { mark: string }) {
 function Highlights() {
   const [active, setActive] = useState<number | null>(null);
   const activeHighlight = active === null ? undefined : highlights[active];
-  return <section id="highlights" className="section highlights-section"><SectionHeader number="06" label="Highlights" title="Milestones beyond the commit history." /><p className="photo-note">Personal photography will live here — the frames are ready for your graduation, hackathon, and certificate images.</p><div className="highlight-grid">{highlights.map(([number, title, caption, mark], i) => <button key={number} onClick={() => setActive(i)} className={`highlight highlight-${i + 1}`}><div className="photo-placeholder"><HighlightMark mark={mark} /><i /></div><span>{number}</span><h3>{title}</h3><p>{caption}</p></button>)}</div><AnimatePresence>{activeHighlight && <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label={activeHighlight[1]} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}><Button variant="ghost" size="icon" aria-label="Close image"><X /></Button><div className="lightbox-frame"><div className="photo-placeholder"><span>{activeHighlight[3]}</span><i /></div><h3>{activeHighlight[1]}</h3><p>{activeHighlight[2]}</p></div></motion.div>}</AnimatePresence></section>;
+  return <section id="highlights" className="section highlights-section"><SectionHeader number="06" label="Highlights" title="Milestones beyond the commit history." /><p className="photo-note"> Captured moments throughout my Journey</p><div className="highlight-grid">{highlights.map(([number, title, caption, mark], i) => <button key={number} onClick={() => setActive(i)} className={`highlight highlight-${i + 1}`}><div className="photo-placeholder"><HighlightMark mark={mark} /><i /></div><span>{number}</span><h3>{title}</h3><p>{caption}</p></button>)}</div><AnimatePresence>{activeHighlight && <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label={activeHighlight[1]} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}><Button variant="ghost" size="icon" aria-label="Close image"><X /></Button><div className="lightbox-frame"><div className="photo-placeholder"><span>{activeHighlight[3]}</span><i /></div><h3>{activeHighlight[1]}</h3><p>{activeHighlight[2]}</p></div></motion.div>}</AnimatePresence></section>;
 }
 
 function Contact() {

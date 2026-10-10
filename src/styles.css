@@ -190,8 +190,9 @@
 .graphic-track { position: absolute; width: 70%; display: flex; justify-content: space-between; border-top: 1px solid var(--border); }
 .graphic-track i { width: .65rem; height: .65rem; margin-top: -.34rem; border-radius: 50%; background: var(--signal); }
 
-.skill-section { background: var(--surface); }
-.skill-layout { margin-left: 28%; display: grid; grid-template-columns: .65fr 1fr; border-top: 1px solid var(--border); }
+.skill-section { background: var(--surface); padding-block: 4.5rem; }
+.skill-section .section-heading { margin-bottom: 2.25rem; }
+.skill-layout { display: grid; grid-template-columns: .65fr 1fr; border-top: 1px solid var(--border); }
 .skill-tabs { display: flex; flex-direction: column; }
 .skill-tabs button { display: grid; grid-template-columns: 3rem 1fr; text-align: left; padding: .72rem 0; border: 0; border-bottom: 1px solid var(--border); background: transparent; color: var(--muted-foreground); font: 500 .82rem var(--font-display); cursor: pointer; }
 .skill-tabs button span { font: 400 .56rem var(--font-mono); }
@@ -328,7 +329,6 @@
   .hero-meta { margin-top: 3rem; gap: 1rem; flex-wrap: wrap; }
   .section { padding-left: 1.2rem; padding-right: 1.2rem; }
   .section-heading { grid-template-columns: 1fr; gap: 1.5rem; }
-  .skill-layout { margin-left: 0; }
   .about-story h2 { font-size: 2.4rem; }
   .about-interest { grid-template-columns: 1.5rem minmax(0, 1fr) 1rem; }
   .about-interest-detail { display: none; }
@@ -378,6 +378,8 @@
   .project-kind { margin-top: 1.5rem; }
   .project-copy h3 { font-size: 2.8rem; }
   .work-section { padding-block: 3.5rem; }
+  .skill-section { padding-block: 3rem; }
+  .skill-section .section-heading { margin-bottom: 1.75rem; }
   .work-slide { grid-template-columns: minmax(0, 1fr); gap: 1rem; align-content: start; }
   .work-slide .project-visual-wrap { aspect-ratio: 1.9; }
   .work-slide .project-copy h3 { font-size: 2rem; }
