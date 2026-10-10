@@ -1,7 +1,8 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion, useScroll } from "motion/react";
 import { useServerFn } from "@tanstack/react-start";
-import { ArrowDown, ArrowRight, ExternalLink, Menu, X } from "lucide-react";
+import useEmblaCarousel from "embla-carousel-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ExternalLink, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { submitContactMessage } from "@/lib/contact.functions";
 import { experience, projects, skillGroups, type Project } from "@/data/portfolio";
@@ -88,16 +89,38 @@ function ProjectArtwork({ project }: { project: Project }) {
 }
 
 function ProjectShowcase({ onSelect }: { onSelect: (project: Project) => void }) {
+  const reduced = useReducedMotion();
+  const [viewportRef, carousel] = useEmblaCarousel({ loop: true, duration: reduced ? 0 : 25 });
+  const [active, setActive] = useState(0);
+  useEffect(() => {
+    if (!carousel) return;
+    const update = () => setActive(carousel.selectedScrollSnap());
+    update();
+    carousel.on("select", update).on("reInit", update);
+    return () => { carousel.off("select", update).off("reInit", update); };
+  }, [carousel]);
   return (
     <section id="work" className="section work-section">
       <SectionHeader number="02" label="Selected work" title="Built from the system outward." />
-      <div className="projects-list">
-        {projects.map((project, index) => (
-          <Reveal key={project.id} className={`project-row project-row-${index + 1}`}>
-            <button className="project-visual-wrap" onClick={() => onSelect(project)} aria-label={`View ${project.name} project details`}><ProjectVisual project={project} /><span className="view-project">Open case file <ArrowRight /></span></button>
-            <div className="project-copy"><span className="project-number">{project.index} / 05</span><p className="project-kind">{project.kind}</p><h3>{project.name}</h3><p>{project.description}</p><div className="tech-line">{project.technologies.slice(0, 5).map(tech => <span key={tech}>{tech}</span>)}</div><Button variant="ghost" onClick={() => onSelect(project)}>Inspect system <ArrowRight /></Button></div>
-          </Reveal>
-        ))}
+      <div className="work-carousel" role="region" aria-roledescription="carousel" aria-label="Selected projects" onKeyDown={event => {
+        if (event.key === "ArrowLeft") { event.preventDefault(); carousel?.scrollPrev(); }
+        if (event.key === "ArrowRight") { event.preventDefault(); carousel?.scrollNext(); }
+      }}>
+        <div className="work-viewport" ref={viewportRef}>
+          <div className="work-track">
+            {projects.map((project, index) => (
+              <article key={project.id} className="work-slide" role="group" aria-roledescription="slide" aria-label={`${index + 1} of ${projects.length}: ${project.name}`} aria-hidden={active !== index} inert={active !== index}>
+                <Button variant="ghost" className="project-visual-wrap" onClick={() => onSelect(project)} aria-label={`View ${project.name} project details`}><ProjectVisual project={project} /><span className="view-project">Open case file <ArrowRight /></span></Button>
+                <div className="project-copy"><span className="project-number">{project.index} / {String(projects.length).padStart(2, "0")}</span><p className="project-kind">{project.kind}</p><h3>{project.name}</h3><p>{project.description}</p><div className="tech-line">{project.technologies.slice(0, 5).map(tech => <span key={tech}>{tech}</span>)}</div><Button variant="ghost" onClick={() => onSelect(project)}>Inspect system <ArrowRight /></Button></div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div className="work-controls">
+          <span className="work-count" role="status" aria-live="polite">{String(active + 1).padStart(2, "0")} <span>/ {String(projects.length).padStart(2, "0")}</span></span>
+          <div className="work-pagination" aria-label="Choose a project">{projects.map((project, index) => <Button key={project.id} variant="ghost" size="icon" aria-label={`Show ${project.name}`} aria-current={active === index ? "true" : undefined} title={project.name} className={active === index ? "is-active" : ""} onClick={() => carousel?.scrollTo(index)}><span /></Button>)}</div>
+          <div className="work-arrows"><Button variant="outline" size="icon" aria-label="Previous project" title="Previous project" onClick={() => carousel?.scrollPrev()}><ArrowLeft /></Button><Button variant="outline" size="icon" aria-label="Next project" title="Next project" onClick={() => carousel?.scrollNext()}><ArrowRight /></Button></div>
+        </div>
       </div>
     </section>
   );
