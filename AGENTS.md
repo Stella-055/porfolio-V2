@@ -10,3 +10,6 @@
 <!-- LOVABLE:END -->
 
 - Keep portfolio content in `src/data/portfolio.ts` and render it through focused portfolio components so personal details remain easy to update.
+- Keep the About section in its own portfolio component with data-driven interest panels so its interactions and personal content stay isolated from the rest of the page.
+- Use the shared element-local useParallax hook for scroll depth; reduce travel on compact screens and disable it for reduced motion to preserve native scrolling and readable layouts.
+- Keep Focus in a dedicated component with data-driven practice tabs and SVG system diagrams so each practice remains keyboard-accessible and its content easy to update.

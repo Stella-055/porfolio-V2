@@ -1,3 +1,18 @@
+export const aboutProfile = {
+  name: "Stella",
+  role: "Software Engineer",
+  location: "Nairobi, Kenya",
+  education: "Software Engineering — Murang'a University of Technology",
+  introduction: "Curious about what’s underneath. Intentional about what’s on top.",
+  description: "I’m a software engineer interested in what happens behind the interface. My work sits between software engineering, emerging technology, and experimentation.",
+  interests: [
+    { name: "Backend", detail: "APIs, databases & architecture", description: "I enjoy building APIs, working with databases and cloud infrastructure, and designing the backend systems that hold a product together." },
+    { name: "Applied AI", detail: "Intelligence with a purpose", description: "I’m interested in integrating AI into useful products — connecting models, business knowledge, and thoughtful interfaces to solve real problems." },
+    { name: "Web3", detail: "Trust built into the system", description: "I explore smart contracts and decentralized applications, where software makes the rules of trust and ownership explicit." },
+    { name: "Smart systems", detail: "Software meets the physical world", description: "My experience extends beyond the screen, into IoT, building automation, and systems that connect software with the physical world." },
+  ],
+};
+
 export type Project = {
   id: string;
   index: string;
@@ -10,8 +25,6 @@ export type Project = {
   image: string;
   website?: string;
   result: string;
-  objective?: string;
-  challenge?: string;
 };
 
 export const projects: Project[] = [
@@ -24,14 +37,10 @@ export const projects: Project[] = [
       "A Web3 marketplace connecting clients and freelancers through decentralized workflows, reputation, staking, and juror-based dispute resolution.",
     highlight:
       "Smart contracts coordinate trust, while a reputation layer and juror workflow handle the edge cases conventional marketplaces centralize.",
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Solidity", "Base", "ethers.js", "AI","IPFS"],
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Solidity", "Base", "ethers.js", "AI"],
     flow: ["User", "Web app", "API", "Database", "Smart contract", "Blockchain"],
     image: "dework",
-    result: "A complete marketplace flow with wallet-native identity, job coordination, and verifiable payment rails.",
-    objective: "Create a trust-minimized marketplace for autonomous work agreements and transparent settlement.",
-    challenge: "Synchronizing offchain workflow state with immutable contract events while preserving a fast product experience.",
-    
- 
+    result: "A full marketplace architecture spanning product interface, backend services, identity, and on-chain settlement.",
   },
   {
     id: "notely",
@@ -47,14 +56,11 @@ export const projects: Project[] = [
     image: "notely",
     website: "https://notesli.netlify.app/",
     result: "A working notes environment where AI supports the user’s thinking instead of becoming the interface itself.",
-     objective: "Reduce the friction between capturing information and turning it into structured, reusable knowledge.",
-   challenge: "Designing asynchronous intelligence features that remain responsive, observable, and resilient to model latency.",
-   
   },
   {
-    id: "Linda Shamba",
+    id: "wildlife-guard",
     index: "03",
-    name: "LINDA SHAMBA",
+    name: "WILDLIFE GUARD",
     kind: "AI × hardware agriculture",
     description:
       "An AI-powered farm protection system that detects potentially crop-threatening wildlife and triggers a physical response.",
@@ -64,9 +70,6 @@ export const projects: Project[] = [
     flow: ["Camera", "Image", "Detection model", "Animal identified", "Trigger", "ESP32", "Robotic response"],
     image: "wildlife",
     result: "A physical prototype demonstrating how software, machine learning, electronics, and agriculture can operate as one system.",
-    objective: "Reduce crop destruction by automatically detecting potentially harmful wildlife and activating a physical deterrence mechanism in real time.",
-   challenge: "Building a responsive pipeline that could process live visual data, distinguish potentially crop-threatening animals from other activity, and reliably trigger the robotic mechanism with minimal delay.",
-
   },
   {
     id: "zaph-tours",
@@ -81,10 +84,6 @@ export const projects: Project[] = [
     flow: ["Discover", "Compare", "Explore", "Choose"],
     image: "graphic",
     result: "A polished front-end demonstrating product thinking and visual craft across screen sizes.",
-    website: "https://zaphtourss.netlify.app/",
-    objective: "Create a polished digital presence for a travel agency that makes destinations and tour experiences easy to explore.",
-  challenge: "Translating a travel brand into an engaging visual experience while maintaining responsive layouts and clear conversion paths.",
-
   },
   {
     id: "whatsapp-ai",
@@ -99,85 +98,17 @@ export const projects: Project[] = [
     flow: ["Question", "Retrieve", "Rank", "Generate", "Respond"],
     image: "graphic",
     result: "Awarded second place for a practical AI system built around real customer-support constraints.",
-     objective: "Deliver reliable customer answers inside an existing messaging workflow without hallucinating company policy.",
-    challenge: "Maintaining grounded answers across multi-turn conversations while controlling response time and retrieval quality.",
- 
-  },
-  
-  {
-    id: "inventra",
-    index: "06",
-    name: "INVENTRA",
-    kind: "Inventory management system",
-    description:
-      "A full-stack inventory and asset management platform built to bring stock, tools, and employee accountability into one system.",
-    highlight:
-     "A TypeScript-based React frontend backed by an Express API, Prisma ORM, and PostgreSQL, with distinct workflows for bulk inventory products and individually serialized assets.",
-technologies: ["React", "TypeScript", "Node.js", "Express", "PostgreSQL", "Prisma"],
-    flow: ["Question", "Retrieve", "Rank", "Generate", "Respond"],
-    image: "graphic",
-     objective: "Digitize inventory operations by replacing fragmented stock tracking with a centralized system for managing products, serialized tools, employee assignments, and issue records.",
-
-  challenge: "Designing a flexible inventory model that could handle hundreds of identical products without unnecessary asset records while still providing precise serial-level tracking and accountability for tools.",
-
-  result: "A scalable inventory workflow covering stock management, serialized asset tracking, employee assignments, product issuance, request handling, and operational documentation.",
-   website:"https://inventra-nine-roan.vercel.app"
   },
 ];
 
 export const skillGroups = {
-  Languages:[ "TypeScript",
-      "JavaScript",
-      "Go",
-      "Solidity",
-      "SQL"],
-  Backend: [ "Node.js",
-      "Express",
-      "REST APIs",
-      "GraphQL",
-      "WebSockets",
-      "Microservices",],
-  Databases: [ "PostgreSQL",
-      "MongoDB",
-      "Prisma",
-      "Redis",
-      "SQL",],
+  Backend: ["Node.js", "Express", "TypeScript", "REST APIs", "GraphQL", "WebSockets", "Microservices"],
+  Databases: ["PostgreSQL", "MongoDB", "Prisma", "Redis"],
   Frontend: ["React", "Next.js", "Tailwind CSS"],
-  Web3: [ "Solidity",
-      "EVM",
-      "Base",
-      "ethers.js",
-      "Smart Contracts",
-      "Wallet Integration",],
+  Web3: ["Solidity", "EVM", "Base", "ethers.js", "Smart Contracts", "Wallet Integration"],
   AI: ["LLM APIs", "RAG", "LangChain", "Vector Search", "AI Assistants", "Agents"],
-  "Cloud / AWS": [ "AWS",
-      "S3",
-      "EC2",
-      "RDS",
-      "Lambda",
-      "CloudFront",
-      "VPC",
-      "Load Balancing",],
-      DevOps:["Git",
-      "GitHub",
-      "GitHub Actions",
-      "Docker",
-      "Kubernetes",
-      "CI/CD",
-      "Vercel",],
-  Systems: [  "System Design",
-      "Distributed Systems",
-      "Microservices",
-      "RabbitMQ",
-      "Redis",
-      "Reverse Proxy",
-      "Load Balancing",
-    "Data Structures & Algorithms",
-      "API Design",],
-  "Soft Skills":[ "Communication",
-      "Teamwork",
-      "Problem Solving",
-      "Time Management",]
+  "Cloud / DevOps": ["AWS", "Docker", "Kubernetes", "GitHub Actions", "CI/CD", "Vercel"],
+  Systems: ["System Design", "Distributed Systems", "RabbitMQ", "Reverse Proxy", "Load Balancing", "API Design"],
 };
 
 export const experience = [
@@ -193,4 +124,11 @@ export const specialties = [
   ["02", "APPLIED AI", "LLM APIs, RAG, vector search, assistants, agents, automation."],
   ["03", "WEB3", "Solidity, EVM, smart contracts, wallets, decentralized applications."],
   ["04", "SMART SYSTEMS", "IoT, KNX, automation, ESP32, connected building systems."],
+] as const;
+
+export const focusDetails = [
+  { headline: "Structure beneath every interaction.", description: "APIs, data, and services designed to work together — from the first request to the architecture behind it.", flow: ["REQUEST", "API", "SERVICES", "DATABASE"], project: "DE—WORK / NOTELY" },
+  { headline: "Intelligence, grounded in something real.", description: "Connecting models to useful knowledge and real workflows through retrieval, assistants, and thoughtful automation.", flow: ["QUESTION", "RETRIEVE", "MODEL", "RESPONSE"], project: "AI WHATSAPP ASSISTANT" },
+  { headline: "Trust becomes part of the architecture.", description: "Smart contracts and decentralized applications that connect wallets, ownership, and on-chain workflows.", flow: ["WALLET", "CONTRACT", "CONSENSUS", "SETTLEMENT"], project: "DE—WORK" },
+  { headline: "Beyond the screen. Into the world.", description: "Bringing software, sensors, and automation together — building systems that perceive, connect, and respond.", flow: ["SENSOR", "DETECT", "CONTROLLER", "ACTION"], project: "WILDLIFE GUARD / ASSORTICA" },
 ] as const;

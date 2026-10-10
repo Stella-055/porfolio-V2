@@ -1,4 +1,5 @@
 import { motion, useReducedMotion } from "motion/react";
+import { useParallax } from "./useParallax";
 
 const nodes = [
   { x: "12%", y: "30%", label: "API" },
@@ -10,9 +11,12 @@ const nodes = [
 
 export function SystemVisual() {
   const reduced = useReducedMotion();
+  const { ref, y } = useParallax<HTMLDivElement>(65);
   return (
     <motion.div
       className="system-visual"
+      ref={ref}
+      style={{ y }}
       aria-hidden="true"
       initial={false}
       animate={{ rotate: reduced ? 0 : [0, 0.4, 0] }}
