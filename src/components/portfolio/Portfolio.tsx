@@ -2,18 +2,22 @@ import { useEffect, useState, type FormEvent, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion, useScroll } from "motion/react";
 import { useServerFn } from "@tanstack/react-start";
 import useEmblaCarousel from "embla-carousel-react";
-import { ArrowDown, ArrowLeft, ArrowRight, ExternalLink, Menu, X } from "lucide-react";
+import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, Github, Linkedin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { submitContactMessage } from "@/lib/contact.functions";
-import { experience, projects, skillGroups, type Project } from "@/data/portfolio";
+import { contactLinks, highlights, projects, skillGroups, type Project } from "@/data/portfolio";
 import deworkImage from "@/assets/dework-system.jpg";
 import notelyImage from "@/assets/notely-system.jpg";
 import wildlifeImage from "@/assets/wildlife-system.jpg";
+import graduationImage from "@/assets/milestone-graduation.jpg";
+import hackathonImage from "@/assets/milestone-hackathon.jpg";
+import certificateImage from "@/assets/milestone-certificate.jpg";
 import { SectionHeader } from "./SectionHeader";
 import { SystemVisual } from "./SystemVisual";
 import { About } from "./About";
 import { useParallax } from "./useParallax";
 import { Focus } from "./Focus";
+import { Experience } from "./Experience";
 
 const images = { dework: deworkImage, notely: notelyImage, wildlife: wildlifeImage };
 const navItems = ["about", "work", "experience", "focus", "highlights", "contact"];
@@ -150,26 +154,37 @@ function SkillMatrix() {
   const [active, setActive] = useState<(typeof groups)[number]>("Backend");
   return (
     <section className="section skill-section">
-      <SectionHeader number="03" label="Technical range" title="Technology that has helped me grow as an Engineer" />
-    
+      <SectionHeader number="03" label="Technical range" title="Tools in context, not isolation." />
       <div className="skill-layout"><div className="skill-tabs" role="tablist" aria-label="Skill groups">{groups.map((group, index) => <button role="tab" aria-selected={active === group} className={active === group ? "active" : ""} onClick={() => setActive(group)} key={group}><span>0{index + 1}</span>{group}</button>)}</div><AnimatePresence mode="wait"><motion.div className="skill-field" key={active} initial={{ opacity: 0, x: 15 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -15 }}><span className="skill-title">{active}</span>{skillGroups[active].map((skill, i) => <div className="skill-item" key={skill}><i style={{ opacity: 1 - i * .08 }} />{skill}</div>)}</motion.div></AnimatePresence></div>
     </section>
   );
 }
 
-function Experience() {
-  return <section id="experience" className="section experience-section"><SectionHeader number="04" label="Experience" title="Software, systems, and the physical world." /><div className="timeline">{experience.map(([year, company, role, text], i) => <Reveal className="timeline-row" key={`${company}-${year}`}><span>{String(i + 1).padStart(2, "0")}</span><time>{year}</time><div><h3>{company}</h3><strong>{role}</strong></div><p>{text}</p></Reveal>)}</div></section>;
-}
-
-const highlights = [["01", "Software engineering graduation", "Murang'a University of Technology · Class of 2026", "GRAD / 26"], ["02", "AI hackathon · 2nd place", "AI WhatsApp Customer Assistant", "02 / PLACE"], ["03", "Teach2Give", "Software Engineering Program · 2025", "T2G / 25"]] as const;
+const milestoneImages = { graduation: graduationImage, hackathon: hackathonImage, certificate: certificateImage } as const;
 function HighlightMark({ mark }: { mark: string }) {
   const { ref, y } = useParallax<HTMLSpanElement>(30);
-  return <motion.span ref={ref} style={{ y }}>{mark}</motion.span>;
+  return <motion.span ref={ref} style={{ y }} className="photo-mark">{mark}</motion.span>;
 }
 function Highlights() {
   const [active, setActive] = useState<number | null>(null);
   const activeHighlight = active === null ? undefined : highlights[active];
-  return <section id="highlights" className="section highlights-section"><SectionHeader number="06" label="Highlights" title="Milestones beyond the commit history." /><p className="photo-note"> Captured moments throughout my Journey</p><div className="highlight-grid">{highlights.map(([number, title, caption, mark], i) => <button key={number} onClick={() => setActive(i)} className={`highlight highlight-${i + 1}`}><div className="photo-placeholder"><HighlightMark mark={mark} /><i /></div><span>{number}</span><h3>{title}</h3><p>{caption}</p></button>)}</div><AnimatePresence>{activeHighlight && <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label={activeHighlight[1]} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}><Button variant="ghost" size="icon" aria-label="Close image"><X /></Button><div className="lightbox-frame"><div className="photo-placeholder"><span>{activeHighlight[3]}</span><i /></div><h3>{activeHighlight[1]}</h3><p>{activeHighlight[2]}</p></div></motion.div>}</AnimatePresence></section>;
+  useEffect(() => {
+    if (active === null) return;
+    const onKey = (event: KeyboardEvent) => event.key === "Escape" && setActive(null);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [active]);
+  return <section id="highlights" className="section highlights-section"><SectionHeader number="06" label="Highlights" title="Milestones beyond the commit history." /><p className="photo-note">Placeholder artwork for now — your graduation, hackathon, and certificate photography drops straight into these frames.</p><div className="highlight-grid">{highlights.map((item, i) => <button key={item.index} onClick={() => setActive(i)} className={`highlight highlight-${i + 1}`}><div className="photo-placeholder"><img src={milestoneImages[item.image]} alt={`${item.title} — placeholder artwork`} loading="lazy" width={1200} height={900} /><HighlightMark mark={item.mark} /><i /></div><span>{item.index}</span><h3>{item.title}</h3><p>{item.caption}</p></button>)}</div><AnimatePresence>{activeHighlight && <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label={activeHighlight.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}><Button variant="ghost" size="icon" aria-label="Close image"><X /></Button><div className="lightbox-frame"><div className="photo-placeholder"><img src={milestoneImages[activeHighlight.image]} alt={`${activeHighlight.title} — placeholder artwork`} width={1200} height={900} /><span className="photo-mark">{activeHighlight.mark}</span><i /></div><h3>{activeHighlight.title}</h3><p>{activeHighlight.caption}</p></div></motion.div>}</AnimatePresence></section>;
+}
+
+function SocialGlyph({ id }: { id: string }) {
+  if (id === "github") return <Github aria-hidden="true" />;
+  if (id === "linkedin") return <Linkedin aria-hidden="true" />;
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" focusable="false">
+      <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.26-.47-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.14.3-.35.44-.52.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.87 1.21 3.07.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.34M12.05 21.8h-.01c-1.8 0-3.56-.49-5.1-1.4l-.36-.2-3.74.98 1-3.65-.24-.38a9.86 9.86 0 0 1-1.51-5.26c0-5.45 4.44-9.88 9.89-9.88 2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 0 1 2.89 6.99c0 5.45-4.43 9.88-9.88 9.88m8.41-18.3A11.82 11.82 0 0 0 12.05 0C5.5 0 .16 5.34.16 11.89c0 2.1.55 4.14 1.59 5.95L.06 24l6.3-1.65a11.88 11.88 0 0 0 5.69 1.45c6.55 0 11.89-5.34 11.89-11.89 0-3.18-1.24-6.17-3.48-8.41" />
+    </svg>
+  );
 }
 
 function Contact() {
@@ -216,6 +231,21 @@ function Contact() {
         <p className={`form-note ${status === "sent" ? "ok" : status === "error" ? "err" : "idle"}`} role={status === "idle" ? undefined : status === "error" ? "alert" : "status"}>{status === "sent" ? "Message received — thank you. I’ll get back to you soon." : status === "error" ? error : "Ready to collaborate — tell me what you’re building."}</p>
       </div>
     </form>
+    <div className="contact-socials">
+      <span className="contact-socials-label">Or reach me directly</span>
+      <div className="contact-social-list">
+        {contactLinks.map((link, i) => (
+          <a key={link.id} className="contact-social" href={link.href} target="_blank" rel="noreferrer noopener">
+            <span className="contact-social-icon"><SocialGlyph id={link.id} /></span>
+            <span className="contact-social-copy">
+              <span className="contact-social-name"><i aria-hidden="true">{String(i + 1).padStart(2, "0")}</i>{link.label}</span>
+              <span className="contact-social-handle">{link.handle}</span>
+            </span>
+            <ArrowUpRight className="contact-social-arrow" aria-hidden="true" />
+          </a>
+        ))}
+      </div>
+    </div>
     <footer><strong>STELLA.</strong><span>SOFTWARE ENGINEER</span><span>NAIROBI, KENYA</span><span>© 2026</span></footer>
   </section>;
 }

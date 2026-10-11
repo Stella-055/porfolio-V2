@@ -132,3 +132,15 @@ export const focusDetails = [
   { headline: "Trust becomes part of the architecture.", description: "Smart contracts and decentralized applications that connect wallets, ownership, and on-chain workflows.", flow: ["WALLET", "CONTRACT", "CONSENSUS", "SETTLEMENT"], project: "DE—WORK" },
   { headline: "Beyond the screen. Into the world.", description: "Bringing software, sensors, and automation together — building systems that perceive, connect, and respond.", flow: ["SENSOR", "DETECT", "CONTROLLER", "ACTION"], project: "WILDLIFE GUARD / ASSORTICA" },
 ] as const;
+
+export const contactLinks = [
+  { id: "github", label: "GitHub", handle: "Stella-055", href: "https://github.com/Stella-055" },
+  { id: "linkedin", label: "LinkedIn", handle: "stella-stephanie-09954129a", href: "https://www.linkedin.com/in/stella-stephanie-09954129a" },
+  { id: "whatsapp", label: "WhatsApp", handle: "+254 712 999 125", href: "https://wa.me/254712999125" },
+] as const;
+
+export const highlights = [
+  { index: "01", title: "Software engineering graduation", caption: "Murang'a University of Technology · Class of 2026", mark: "GRAD / 26", image: "graduation" },
+  { index: "02", title: "AI hackathon · 2nd place", caption: "AI WhatsApp Customer Assistant", mark: "02 / PLACE", image: "hackathon" },
+  { index: "03", title: "Teach2Give", caption: "Software Engineering Program · 2025", mark: "T2G / 25", image: "certificate" },
+] as const;
