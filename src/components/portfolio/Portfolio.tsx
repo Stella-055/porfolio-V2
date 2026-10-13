@@ -5,13 +5,16 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, ExternalLink, Github, Linkedin, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { submitContactMessage } from "@/lib/contact.functions";
-import { contactLinks, highlights, projects, skillGroups, type Project } from "@/data/portfolio";
+import { certifications, contactLinks, highlights, projects, skillGroups, type Project } from "@/data/portfolio";
 import deworkImage from "@/assets/dework-system.jpg";
 import notelyImage from "@/assets/notely-system.jpg";
 import wildlifeImage from "@/assets/wildlife-system.jpg";
-import graduationImage from "@/assets/milestone-graduation.jpg";
-import hackathonImage from "@/assets/milestone-hackathon.jpg";
+import graduationImage from "@/assets/milestone-graduation.jpeg";
+import hackathonImage from "@/assets/milestone-hackathon.jpeg";
 import certificateImage from "@/assets/milestone-certificate.jpg";
+import certificateGraduationImage from "@/assets/certificate-graduation.jpeg";
+import certificateHackathonImage from "@/assets/certificate-hackathon.jpg";
+import certificateProgramImage from "@/assets/certificate-program.jpg";
 import { SectionHeader } from "./SectionHeader";
 import { SystemVisual } from "./SystemVisual";
 import { About } from "./About";
@@ -165,6 +168,7 @@ function HighlightMark({ mark }: { mark: string }) {
   const { ref, y } = useParallax<HTMLSpanElement>(30);
   return <motion.span ref={ref} style={{ y }} className="photo-mark">{mark}</motion.span>;
 }
+const certImages = { graduation: certificateGraduationImage, hackathon: certificateHackathonImage, program: certificateProgramImage } as const;
 function Highlights() {
   const [active, setActive] = useState<number | null>(null);
   const activeHighlight = active === null ? undefined : highlights[active];
@@ -174,7 +178,54 @@ function Highlights() {
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [active]);
-  return <section id="highlights" className="section highlights-section"><SectionHeader number="06" label="Highlights" title="Milestones beyond the commit history." /><p className="photo-note">Placeholder artwork for now — your graduation, hackathon, and certificate photography drops straight into these frames.</p><div className="highlight-grid">{highlights.map((item, i) => <button key={item.index} onClick={() => setActive(i)} className={`highlight highlight-${i + 1}`}><div className="photo-placeholder"><img src={milestoneImages[item.image]} alt={`${item.title} — placeholder artwork`} loading="lazy" width={1200} height={900} /><HighlightMark mark={item.mark} /><i /></div><span>{item.index}</span><h3>{item.title}</h3><p>{item.caption}</p></button>)}</div><AnimatePresence>{activeHighlight && <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label={activeHighlight.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}><Button variant="ghost" size="icon" aria-label="Close image"><X /></Button><div className="lightbox-frame"><div className="photo-placeholder"><img src={milestoneImages[activeHighlight.image]} alt={`${activeHighlight.title} — placeholder artwork`} width={1200} height={900} /><span className="photo-mark">{activeHighlight.mark}</span><i /></div><h3>{activeHighlight.title}</h3><p>{activeHighlight.caption}</p></div></motion.div>}</AnimatePresence></section>;
+  return (
+    <section id="highlights" className="section highlights-section">
+      <SectionHeader number="06" label="Highlights" title="Milestones beyond the commit history." />
+      <p className="photo-note">Placeholder artwork for now — your graduation, hackathon, and certificate photography drops straight into these frames.</p>
+      <div className="highlight-grid">
+        {highlights.map((item, i) => (
+          <button key={item.index} onClick={() => setActive(i)} className={`highlight highlight-${i + 1}`}>
+            <div className="photo-placeholder"><img src={milestoneImages[item.image]} alt={`${item.title} — placeholder artwork`} loading="lazy" width={1200} height={900} /><HighlightMark mark={item.mark} /><i /></div>
+            <span>{item.index}</span>
+            <h3>{item.title}</h3>
+            <p>{item.caption}</p>
+          </button>
+        ))}
+      </div>
+      <div className="cert-band">
+        <span className="cert-label">Certifications</span>
+        <div className="cert-viewport" role="region" aria-label="Certifications">
+          <div className="cert-track">
+            {[0, 1, 2].map(copy => (
+              <ul className="cert-row" key={copy} aria-hidden={copy > 0}>
+                {certifications.map((cert, i) => (
+                  <li key={cert.title}>
+                    <figure className="cert-card">
+                      <img src={certImages[cert.image]} alt={`${cert.title} — placeholder artwork`} loading="lazy" width={1024} height={768} />
+                      <figcaption><i aria-hidden="true">{String(i + 1).padStart(2, "0")}</i><strong>{cert.title}</strong><span>{cert.issuer} · {cert.year}</span></figcaption>
+                    </figure>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
+        </div>
+      </div>
+      <p className="cert-note">Scan placeholders for now — your certificate photography drops straight into these frames.</p>
+      <AnimatePresence>
+        {activeHighlight && (
+          <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label={activeHighlight.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}>
+            <Button variant="ghost" size="icon" aria-label="Close image"><X /></Button>
+            <div className="lightbox-frame">
+              <div className="photo-placeholder"><img src={milestoneImages[activeHighlight.image]} alt={`${activeHighlight.title} — placeholder artwork`} width={1200} height={900} /><span className="photo-mark">{activeHighlight.mark}</span><i /></div>
+              <h3>{activeHighlight.title}</h3>
+              <p>{activeHighlight.caption}</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
 }
 
 function SocialGlyph({ id }: { id: string }) {

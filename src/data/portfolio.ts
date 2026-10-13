@@ -57,6 +57,7 @@ export const projects: Project[] = [
     website: "https://notesli.netlify.app/",
     result: "A working notes environment where AI supports the user’s thinking instead of becoming the interface itself.",
   },
+  
   {
     id: "wildlife-guard",
     index: "03",
@@ -98,6 +99,21 @@ export const projects: Project[] = [
     flow: ["Question", "Retrieve", "Rank", "Generate", "Respond"],
     image: "graphic",
     result: "Awarded second place for a practical AI system built around real customer-support constraints.",
+  },
+  {
+    id: "Inventra",
+    index: "06",
+    name: "INVENTRA",
+    kind: "INVENTORY MANAGEMENT SYSTEM",
+    description:
+      "A full-stack products and tools management system where users can add and manage products, track inventory,  generate reports, generate delivery notes and manage employees.",
+    highlight:
+      "",
+    technologies: ["React", "Express", "PostgreSQL", "Prisma", "LLM APIs"],
+    flow: ["Capture", "Organize", "Index", "Retrieve", "Enhance"],
+    image: "graphic",
+    website: "https://notesli.netlify.app/",
+    result: "A working notes environment where AI supports the user’s thinking instead of becoming the interface itself.",
   },
 ];
 
@@ -143,4 +159,10 @@ export const highlights = [
   { index: "01", title: "Software engineering graduation", caption: "Murang'a University of Technology · Class of 2026", mark: "GRAD / 26", image: "graduation" },
   { index: "02", title: "AI hackathon · 2nd place", caption: "AI WhatsApp Customer Assistant", mark: "02 / PLACE", image: "hackathon" },
   { index: "03", title: "Teach2Give", caption: "Software Engineering Program · 2025", mark: "T2G / 25", image: "certificate" },
+] as const;
+
+export const certifications = [
+  { title: "Software Engineering Program", issuer: "Teach2Give", year: "2025", image: "program" },
+  { title: "AI Hackathon", issuer: "2nd Place", year: "2025", image: "hackathon" },
+  { title: "BSc Software Engineering", issuer: "Murang'a University of Technology", year: "2026", image: "graduation" },
 ] as const;
