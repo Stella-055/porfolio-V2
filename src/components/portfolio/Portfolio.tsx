@@ -12,9 +12,7 @@ import wildlifeImage from "@/assets/wildlife-system.jpg";
 import graduationImage from "@/assets/milestone-graduation.jpeg";
 import hackathonImage from "@/assets/milestone-hackathon.jpeg";
 import certificateImage from "@/assets/milestone-certificate.jpg";
-import certificateGraduationImage from "@/assets/certificate-graduation.jpeg";
-import certificateHackathonImage from "@/assets/certificate-hackathon.jpg";
-import certificateProgramImage from "@/assets/certificate-program.jpg";
+
 import { SectionHeader } from "./SectionHeader";
 import { SystemVisual } from "./SystemVisual";
 import { About } from "./About";
@@ -168,7 +166,7 @@ function HighlightMark({ mark }: { mark: string }) {
   const { ref, y } = useParallax<HTMLSpanElement>(30);
   return <motion.span ref={ref} style={{ y }} className="photo-mark">{mark}</motion.span>;
 }
-const certImages = { graduation: certificateGraduationImage, hackathon: certificateHackathonImage, program: certificateProgramImage } as const;
+
 function Highlights() {
   const [active, setActive] = useState<number | null>(null);
   const activeHighlight = active === null ? undefined : highlights[active];
@@ -201,7 +199,7 @@ function Highlights() {
                 {certifications.map((cert, i) => (
                   <li key={cert.title}>
                     <figure className="cert-card">
-                      <img src={certImages[cert.image]} alt={`${cert.title} — placeholder artwork`} loading="lazy" width={1024} height={768} />
+                      <img src={cert.image} alt={`${cert.title} — placeholder artwork`} loading="lazy" width={1024} height={768} />
                       <figcaption><i aria-hidden="true">{String(i + 1).padStart(2, "0")}</i><strong>{cert.title}</strong><span>{cert.issuer} · {cert.year}</span></figcaption>
                     </figure>
                   </li>

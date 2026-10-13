@@ -1,3 +1,12 @@
+import certificateGraduation from "@/assets/certificate-graduation.jpg";
+import Ava from "@/assets/ava.jpg";
+import mlsa from "@/assets/mlsa.jpg";
+import nolongting from "@/assets/nolongting.jpg";
+import origin from "@/assets/origin.jpg";
+import summit from "@/assets/summit.jpg";
+import t2g from "@/assets/t2g.jpg";
+import tharaka from "@/assets/Tharaka.jpg";
+
 export const aboutProfile = {
   name: "Stella",
   role: "Software Engineer",
@@ -162,7 +171,15 @@ export const highlights = [
 ] as const;
 
 export const certifications = [
-  { title: "Software Engineering Program", issuer: "Teach2Give", year: "2025", image: "program" },
-  { title: "AI Hackathon", issuer: "2nd Place", year: "2025", image: "hackathon" },
-  { title: "BSc Software Engineering", issuer: "Murang'a University of Technology", year: "2026", image: "graduation" },
+  
+  { title: "BSc Software Engineering", issuer: "Murang'a University of Technology", year: "2026", image: certificateGraduation  },
+  { title: "Software Engineering Program", issuer: "Teach2Give", year: "2025", image: t2g },
+  { title: "AI Summit Hackathon", issuer: "3rd Place", year: "2025", image: summit },
+  { title: "AR/VR Hackathon", issuer: "Origin Labs", year: "2025", image: origin },
+  { title: "Blockchain Fundamentals", issuer: "No Long Ting Group", year: "2025", image: nolongting },
+  { title: "Git and GitHub", issuer: "Microsoft Student Ambassadors", year: "2025", image: mlsa },
+  { title: "AI Hackathon", issuer: "Tharaka Nithi university", year: "2026", image: tharaka },
+  { title: "Blockchain Foundations", issuer: "Avalanche Academy", year: "2025", image: Ava },
+ 
+
 ] as const;
