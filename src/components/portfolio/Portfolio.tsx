@@ -179,7 +179,6 @@ function Highlights() {
   return (
     <section id="highlights" className="section highlights-section">
       <SectionHeader number="06" label="Highlights" title="Milestones beyond the commit history." />
-      <p className="photo-note">Placeholder artwork for now — your graduation, hackathon, and certificate photography drops straight into these frames.</p>
       <div className="highlight-grid">
         {highlights.map((item, i) => (
           <button key={item.index} onClick={() => setActive(i)} className={`highlight highlight-${i + 1}`}>
@@ -209,7 +208,7 @@ function Highlights() {
           </div>
         </div>
       </div>
-      <p className="cert-note">Scan placeholders for now — your certificate photography drops straight into these frames.</p>
+      
       <AnimatePresence>
         {activeHighlight && (
           <motion.div className="lightbox" role="dialog" aria-modal="true" aria-label={activeHighlight.title} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={() => setActive(null)}>
