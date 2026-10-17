@@ -31,10 +31,10 @@ export const submitContactMessage = createServerFn({ method: "POST" })
   .middleware([clientContext])
   .inputValidator((data: unknown) => contactSchema.parse(data))
   .handler(async ({ data, context }) => {
-    // Honeypot filled in → almost certainly a bot. Pretend success, store nothing.
+    // Honeypot filled in → almost certainly a bot. Pretend success, send nothing.
     if (data.company) return { ok: true as const };
 
-    const { rateLimit } = await import("./contact.server");
+    const { rateLimit, sendContactEmail } = await import("./contact.server");
     if (!rateLimit(context.ip)) {
       return {
         ok: false as const,
@@ -42,16 +42,10 @@ export const submitContactMessage = createServerFn({ method: "POST" })
       };
     }
 
-    const { supabaseAdmin } = await import(
-      "@/integrations/supabase/client.server"
-    );
-    const { error } = await supabaseAdmin.from("contact_submissions").insert({
-      name: data.name,
-      email: data.email,
-      message: data.message,
-    });
-    if (error) {
-      console.error("[contact] insert failed:", error.message);
+    try {
+      await sendContactEmail(data);
+    } catch (err) {
+      console.error("[contact] email failed:", err);
       return {
         ok: false as const,
         error:
