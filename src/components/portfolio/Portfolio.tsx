@@ -69,7 +69,7 @@ function Hero() {
           <div className="eyebrow"><span>Software engineer</span><span>Nairobi · KE</span></div>
           <h1><span>STELLA</span><em>ENGINEERS</em><span>SYSTEMS.</span></h1>
           <p>Building software across backend systems, applied AI, Web3, and connected technologies.</p>
-          <p className="hero-note">I like understanding how systems work beneath the interface — then building them better.</p>
+          <p className="hero-note">I like understanding how systems work beneath the interface  then building them better.</p>
           <div className="hero-actions">
             <Button size="lg" onClick={() => scrollTo("work")}>View my work <ArrowDown /></Button>
             <Button size="lg" variant="outline" onClick={() => scrollTo("contact")}>Get in touch <ArrowRight /></Button>
@@ -276,7 +276,7 @@ function Contact() {
       <input type="text" name="company" className="hp-field" tabIndex={-1} autoComplete="off" aria-hidden="true" />
       <div className="form-actions">
         <Button size="lg" type="submit" disabled={status === "sending"}>{status === "sending" ? "Sending" : "Send message"} <ArrowRight /></Button>
-        <p className={`form-note ${status === "sent" ? "ok" : status === "error" ? "err" : "idle"}`} role={status === "idle" ? undefined : status === "error" ? "alert" : "status"}>{status === "sent" ? "Message received — thank you. I’ll get back to you soon." : status === "error" ? error : "Ready to collaborate — tell me what you’re building."}</p>
+        <p className={`form-note ${status === "sent" ? "ok" : status === "error" ? "err" : "idle"}`} role={status === "idle" ? undefined : status === "error" ? "alert" : "status"}>{status === "sent" ? "Message received — thank you. I’ll get back to you soon." : status === "error" ? error : "Ready to collaborate ? Tell me what you’re building."}</p>
       </div>
     </form>
     <div className="contact-socials">

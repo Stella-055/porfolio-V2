@@ -47,8 +47,9 @@ export const projects: Project[] = [
     highlight:
       "Smart contracts coordinate trust, while a reputation layer and juror workflow handle the edge cases conventional marketplaces centralize.",
     technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "Solidity", "Base", "ethers.js", "AI"],
-    flow: ["User", "Web app", "API", "Database", "Smart contract", "Blockchain"],
+    flow: ["User", "Web app","Wallet connect", "API", "Database", "Smart contract", "Blockchain"],
     image: "dework",
+        website: "https://de-work-seven.vercel.app/",
     result: "A full marketplace architecture spanning product interface, backend services, identity, and on-chain settlement.",
   },
   {
@@ -93,6 +94,7 @@ export const projects: Project[] = [
     technologies: ["React", "JavaScript", "Tailwind CSS", "Responsive Design"],
     flow: ["Discover", "Compare", "Explore", "Choose"],
     image: "graphic",
+    website: "https://zaphtourss.netlify.app/",
     result: "A polished front-end demonstrating product thinking and visual craft across screen sizes.",
   },
   {
@@ -121,7 +123,7 @@ export const projects: Project[] = [
     technologies: ["React", "Express", "PostgreSQL", "Prisma", "LLM APIs"],
     flow: ["Capture", "Organize", "Index", "Retrieve", "Enhance"],
     image: "graphic",
-    website: "https://notesli.netlify.app/",
+    website: "https://inventra-nine-roan.vercel.app/",
     result: "A working notes environment where AI supports the user’s thinking instead of becoming the interface itself.",
   },
 ];

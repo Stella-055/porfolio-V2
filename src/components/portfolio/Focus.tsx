@@ -41,7 +41,7 @@ export function Focus() {
   };
   return <section id="focus" className="section focus-section" aria-labelledby="focus-heading">
     <div className="focus-topline"><span>05 / WHAT I BUILD</span><span>FOUR PRACTICES. ONE SYSTEMS MINDSET.</span></div>
-    <div className="focus-intro"><h2 id="focus-heading">Different layers.<br /><em>Same curiosity.</em></h2><p>From the architecture beneath a product to the intelligence inside it — and the world beyond the screen.</p></div>
+    <div className="focus-intro"><h2 id="focus-heading">Different layers.<br /><em>Same curiosity.</em></h2><p>From the architecture beneath a product to the intelligence inside it  and the world beyond the screen.</p></div>
     <div className="focus-layout">
       <div className="focus-tabs" role="tablist" aria-label="Engineering practices" aria-orientation="vertical">
         {specialties.map(([number, name, copy], index) => <Button variant="ghost" key={number} id={`focus-tab-${index}`} role="tab" aria-selected={active === index} aria-controls="focus-panel" tabIndex={active === index ? 0 : -1} onClick={() => setActive(index)} onKeyDown={event => handleKey(event, index)} className={`focus-tab ${index === active ? "is-active" : ""}`}><span className="focus-number">{number}</span><span className="focus-tab-copy"><strong>{name}</strong><span>{copy}</span></span><ArrowUpRight /></Button>)}
