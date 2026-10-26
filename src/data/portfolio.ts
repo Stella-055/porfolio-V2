@@ -129,7 +129,7 @@ export const projects: Project[] = [
 ];
 
 export const skillGroups = {
-  Backend: ["Node.js", "Express", "TypeScript", "REST APIs", "GraphQL", "WebSockets", "Microservices"],
+  Backend: ["Node.js", "Express", "TypeScript","Go", "REST APIs", "GraphQL", "WebSockets", "Microservices"],
   Databases: ["PostgreSQL", "MongoDB", "Prisma", "Redis"],
   Frontend: ["React", "Next.js", "Tailwind CSS"],
   Web3: ["Solidity", "EVM", "Base", "ethers.js", "Smart Contracts", "Wallet Integration"],
